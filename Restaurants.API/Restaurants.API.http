@@ -18,7 +18,7 @@ Content-Type:application/json
 {
   "Name": "Tasty Bites",
   "Description": "A cozy restaurant serving a variety of dishes.",
-  "Category": "International Cuisine",
+  "Category": "Indian",
   "ContactEmail": "info@hotmail.com",
   "ContactNumber": "dd",
   "PostalCode": "10-311"
@@ -27,4 +27,21 @@ Content-Type:application/json
 
 
 ###
-GET https://localhost:7278/api/restaurants/9
+
+DELETE {{Restaurants.API_HostAddress}}/api/restaurants/5
+
+###
+
+PATCH {{Restaurants.API_HostAddress}}/api/restaurants/7
+Content-Type:application/json
+{
+  "Name": "Tasto taylan",
+  "Description": "crazy dishes.",
+  "Category": "Indian",
+  "ContactEmail": "info2@hotmail.com",
+  "ContactNumber": "dd",
+  "PostalCode": "10-311"
+}
+
+
+###

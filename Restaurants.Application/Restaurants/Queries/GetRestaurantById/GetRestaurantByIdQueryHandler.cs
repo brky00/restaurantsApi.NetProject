@@ -7,13 +7,13 @@ using Restaurants.Domain.Repositories;
 
 namespace Restaurants.Application.Restaurants.Queries.GetRestaurantById;
 
-public class GetRestaurantByIdQueryHandler(ILogger<GetAllRestaurantsQueryHandler> logger,
+public class GetRestaurantByIdQueryHandler(ILogger<GetRestaurantByIdQueryHandler> logger,
     IMapper mapper,
     IRestaurantsRepository restaurantsRepository) : IRequestHandler<GetRestaurantByIdQuery, RestaurantDto?>
 {
     public async Task<RestaurantDto?> Handle(GetRestaurantByIdQuery request, CancellationToken cancellationToken)
     {
-        logger.LogInformation($"Getting al restaurant{request.Id}");
+        logger.LogInformation("Getting restaurant{RestaurantId}",request.Id);
         var restaurant = await restaurantsRepository.GetByIdAsync(request.Id);
         var restaurantDto = mapper.Map<RestaurantDto>(restaurant);
         //var restaurantDto= RestaurantDto.FromEntity(restaurant);

@@ -9,20 +9,24 @@ GET {{Restaurants.API_HostAddress}}/api/restaurants
 
 ###
 
-GET {{Restaurants.API_HostAddress}}/api/restaurants/1
+GET {{Restaurants.API_HostAddress}}/api/restaurants/6
 
 ###
 
 POST {{Restaurants.API_HostAddress}}/api/restaurants
 Content-Type:application/json
 {
-  "Name": "Tasty Bites",
-  "Description": "A cozy restaurant serving a variety of dishes.",
+  "Name": "Tasty volTests2",
+  "Description": "A cozy restaurant serving a variety of delicious dishes.",
   "Category": "Indian",
-  "ContactEmail": "info@hotmail.com",
-  "ContactNumber": "dd",
-  "PostalCode": "10-311"
+  "HasDelivery": true,
+  "ContactEmail": "info@test.com",
+  "ContactNumber": "555-1234",
+  "City": "New York",
+  "Street": "123 Main Street",
+  "PostalCode": "10-010"
 }
+
 
 
 
@@ -32,15 +36,18 @@ DELETE {{Restaurants.API_HostAddress}}/api/restaurants/5
 
 ###
 
-PATCH {{Restaurants.API_HostAddress}}/api/restaurants/7
-Content-Type:application/json
+
+
+
+###
+
+PATCH {{Restaurants.API_HostAddress}}/api/restaurants/14
+Content-Type: application/json
+
 {
-  "Name": "Tasto taylan",
-  "Description": "crazy dishes.",
-  "Category": "Indian",
-  "ContactEmail": "info2@hotmail.com",
-  "ContactNumber": "dd",
-  "PostalCode": "10-311"
+  "Name": "Sample patch2 vol2",
+  "Description": "This is a sample restaurant description.",
+  "HasDelivery": false
 }
 
 

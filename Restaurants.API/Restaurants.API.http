@@ -1,15 +1,16 @@
 @Restaurants.API_HostAddress = https://localhost:7278
 
-
+@token = CfDJ8Ke8ZSo6zXFLle5l90OVR_vNw9la6lLoMHTAdRUOiPX8sm2csOIqMdKEZvZwTdZ8WbTVsXlUeZAK6nsFuzFmLSpt5M2MqlieEN9fSLcva88s6OVAKnrLu0JHckixH33N7K3Dh1Wof_TxsAgmtBoIvgFzFMXlSUM-_aQiA7dZeGrcrv0C8sjNyrbo14qoypp1_lM4_G48WwUrsXdjw7Xif2zutcbqECMXB43J_dQ4utP29-YPFFj2pFgS-Az6noykqPNtav1a5AE5U6FjZ0V1XPq0D0hNZVyfa982rwQ0mU8gypOqFF6zvqdEIWGv2uXPB0qtzJVyyJrTs5XKI0-I2WM3PzO8anUUGk0P-OdYp2pAXyaP1z4KWIsf2g8EcsLNVqATj4xwaszkS5RIKRpkko3HP6f9N8-8FFLu7D3PUh1_IUxai7yCXMPRhEJkDyzZEnoNf8mjtHNJHkuBDoGYcnv-Nfh_AQygSh6WFSeEwG0MS3Fp8wvwujA27ouwdh7Jj_WB1z8uitSaUJzomR39dSJ-S_Y8WrSDjrlAUTqOtHgBkAIzmPAIGL04uTAYMxN7fLWFaVHVJk096hbu3I0vF0eJMeuCCksgzeuZLUPrYkx3PtKt91DgrgD52H0nDcgxNYN86mGe3sHM2FfwpfWq0pFQcCUwbereCFF9ycnQGPImSVrasHGn3MMgFb7839a3IQba27fwdTDZsSz0yzkwGdE
 
 ###
 
 
 GET {{Restaurants.API_HostAddress}}/api/restaurants
+Authorization: Bearer {{token}}
 
 ###
 
-GET {{Restaurants.API_HostAddress}}/api/restaurants/60
+GET {{Restaurants.API_HostAddress}}/api/restaurants/3
 
 ###
 
@@ -53,15 +54,46 @@ Content-Type: application/json
 
 ###
 
-POST {{Restaurants.API_HostAddress}}/api/restaurants/39/dishes
+POST {{Restaurants.API_HostAddress}}/api/restaurants/3/dishes
 Content-Type: application/json
 
 {
   "Name": "Spaghetti Bolognese",
   "Description": "Classic Italian pasta dish with rich meat sauce",
-  "Price": 12.99,
+  "Price": 13.99,
   "KiloCalories": 750
 }
 
 
 ###
+
+GET {{Restaurants.API_HostAddress}}/api/restaurants/3/dishes
+
+###
+
+GET {{Restaurants.API_HostAddress}}/api/restaurants/1/dishes/2
+
+###
+
+DELETE {{Restaurants.API_HostAddress}}/api/restaurants/399/dishes
+
+###
+
+POST {{Restaurants.API_HostAddress}}/api/identity/register
+Content-Type: application/json
+
+{
+    "email": "testuser6@test.com",
+    "password": "Password6!"
+}
+###
+
+
+POST {{Restaurants.API_HostAddress}}/api/identity/login
+Content-Type: application/json
+
+{
+     "email": "testuser6@test.com",
+    "password": "Password6!"
+}
+

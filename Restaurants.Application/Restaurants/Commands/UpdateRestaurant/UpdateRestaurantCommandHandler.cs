@@ -2,13 +2,17 @@
 using MediatR;
 using Microsoft.Extensions.Logging;
 using Restaurants.Application.Restaurants.Commands.DeleteRestaurant;
+using Restaurants.Domain.Contans;
 using Restaurants.Domain.Entities;
 using Restaurants.Domain.Exceptions;
+using Restaurants.Domain.Interfaces;
 using Restaurants.Domain.Repositories;
 
 namespace Restaurants.Application.Restaurants.Commands.UpdateRestaurant;
 
-public class UpdateRestaurantCommandHandler(ILogger<UpdateRestaurantCommandHandler> logger, IRestaurantsRepository restaurantsRepository,IMapper mapper) : IRequestHandler<UpdateRestaurantCommand>
+public class UpdateRestaurantCommandHandler(ILogger<UpdateRestaurantCommandHandler> logger, 
+    IRestaurantsRepository restaurantsRepository,IMapper mapper,
+    IRestaurantAuthorizationService restaurantAuthorizationService) : IRequestHandler<UpdateRestaurantCommand>
 {
     public async Task Handle(UpdateRestaurantCommand request, CancellationToken cancellationToken)
     {
@@ -18,6 +22,12 @@ public class UpdateRestaurantCommandHandler(ILogger<UpdateRestaurantCommandHandl
         if (restaurant is null)
             throw new NotFoundException(nameof(Restaurant), request.Id.ToString());
         mapper.Map(request, restaurant);
+
+
+        if (!restaurantAuthorizationService.Authorize(restaurant, ResourceOperation.Update))
+        {
+            throw new ForbidException();
+        }
 
 
         //vi bruker automapper istedenfor dette :

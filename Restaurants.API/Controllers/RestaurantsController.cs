@@ -7,7 +7,9 @@ using Restaurants.Application.Restaurants.Commands.UpdateRestaurant;
 using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Application.Restaurants.Queries.GetAllRestaurants;
 using Restaurants.Application.Restaurants.Queries.GetRestaurantById;
+using Restaurants.Domain.Contans;
 using Restaurants.Domain.Entities;
+using Restaurants.Infrastructure.Authorization;
 
 namespace Restaurants.API.Controllers;
 
@@ -25,20 +27,11 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
 
         var restaurants = await mediator.Send(new GetAllRestaurantsQuery());
         return Ok(restaurants); // Restoran listesini JSON formatında döndürüyoruz
-        //var currentUser = HttpContext.User;
-        //if (currentUser.Identity.IsAuthenticated)
-        //{
-        //    var userName = currentUser.Identity.Name;
-        //    // Kullanıcının claim'lerini (haklarını) alabiliriz
-        //    var claims = currentUser.Claims;
-        //}
-        //else
-        //{
-        //    // Kullanıcı oturum açmamış
-        //}
+       
     }
 
     [HttpGet("{id}")]
+    [Authorize(Policy =PolicyNames.HasNationality)]
     public async Task<ActionResult<RestaurantDto?>> GetById([FromRoute] int id)
     {
       
@@ -62,13 +55,15 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
     }
 
     [HttpPost]
+    [Authorize(Roles = UserRoles.Owner)]
     public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantCommand command)
     {
-        //Vi kunne brukt denne validation metoden under her også med ModelState objektet for å sjekke om entityen er valid istedenfor [ApiController] som gjør dette automatisk.
-        //if (!ModelState.IsValid)
-        //{
-        //    return BadRequest(ModelState);
-        //}
+        bool IsItOwner = User.IsInRole("Owner");
+        if (IsItOwner) { Console.WriteLine("Yes"); }
+        else
+        {
+            Console.WriteLine("No");
+        }
 
         int id = await mediator.Send(command);
         return CreatedAtAction(nameof(GetById),new {id},null);
